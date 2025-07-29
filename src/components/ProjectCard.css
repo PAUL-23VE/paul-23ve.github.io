@@ -1,0 +1,19 @@
+.project-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.project-card h3 {
+  margin-top: 0;
+}
+
+.project-card a {
+  color: #0077cc;
+  font-weight: bold;
+}
+.project-card a:hover {
+  text-decoration: underline;
+}
