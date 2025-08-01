@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PERFIL1 from '/images/PERFIL1.png';
 import { motion } from "framer-motion";
 import { 
   FaReact, 
@@ -123,7 +124,7 @@ function About() {
           <div style={styles.profileContainer}>
             <div style={styles.imageCircle}>
               <img 
-                src="/src/images/PERFIL1.png" 
+                src={PERFIL1} 
                 alt="Paul Velastegui" 
                 style={styles.profileImage}
               />

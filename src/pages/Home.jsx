@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import InicioPortafolio from '/images/Inicio-portafolio.png';
 
 // Imagen perfil con animación suave al hacer hover
 const ProfileImage = () => (
@@ -27,7 +28,7 @@ const ProfileImage = () => (
   >
    {/* Reemplaza la siguiente línea con tu imagen */}
     <img 
-      src="/src/images/Inicio-portafolio.png" 
+      src={InicioPortafolio} 
       alt="Bienvenido a mi perfil" 
       style={{
         width: "100%",
