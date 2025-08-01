@@ -123,7 +123,7 @@ function About() {
           <div style={styles.profileContainer}>
             <div style={styles.imageCircle}>
               <img 
-                src="./src/images/PERFIL1.png" 
+                src="/src/images/PERFIL1.png" 
                 alt="Paul Velastegui" 
                 style={styles.profileImage}
               />
