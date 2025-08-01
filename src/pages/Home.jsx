@@ -18,13 +18,23 @@ const ProfileImage = () => (
       boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
       transition: "transform 0.3s ease",
       cursor: "pointer",
+      overflow: "hidden",
     }}
     onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
     onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
     aria-label="Imagen de perfil Paul Velastegui"
     role="img"
   >
-    PV
+   {/* Reemplaza la siguiente línea con tu imagen */}
+    <img 
+      src="../src/images/Inicio-portafolio.png" 
+      alt="Bienvenido a mi perfil" 
+      style={{
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+      }}
+    />
   </div>
 );
 
