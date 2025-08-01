@@ -27,7 +27,7 @@ const ProfileImage = () => (
   >
    {/* Reemplaza la siguiente línea con tu imagen */}
     <img 
-      src="../src/images/Inicio-portafolio.png" 
+      src="./src/images/Inicio-portafolio.png" 
       alt="Bienvenido a mi perfil" 
       style={{
         width: "100%",
