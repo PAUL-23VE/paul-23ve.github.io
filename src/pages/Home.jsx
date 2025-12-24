@@ -368,14 +368,14 @@ const styles = {
     animationIterationCount: "infinite",
   },
   section: {
-    position: "relative",
     zIndex: 2,
-    minHeight: "100vh",
     display: "flex",
-    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    padding: "1rem 1rem 4rem 1rem",
+    minHeight: "calc(100vh - 70px - 60px)",
+    width: "100vw",
+    boxSizing: "border-box",
+    marginTop: "48px",
   },
   content: {
     background: "rgba(255, 255, 255, 0.02)",
@@ -383,12 +383,12 @@ const styles = {
     border: "1px solid rgba(255, 255, 255, 0.08)",
     borderRadius: 24,
     padding: "3rem",
-    maxWidth: 1000,
+    maxWidth: 1200, // Aumenta el ancho máximo
     width: "100%",
     textAlign: "center",
     boxShadow: "0 20px 60px rgba(0,0,0,0.2)",
     transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
-    margin: "2rem 0",
+    margin: "0 auto",
   },
   profileContainer: {
     position: "relative",

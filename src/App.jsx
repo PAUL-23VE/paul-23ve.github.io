@@ -5,12 +5,14 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
+import AnimatedBackground from './components/AnimatedBackground';
 
 function App() {
   return (
     <>
+      <AnimatedBackground />
       <Navbar />
-      <div className="container">
+      <div style={{ minHeight: 'calc(100vh - 70px - 60px)' }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
