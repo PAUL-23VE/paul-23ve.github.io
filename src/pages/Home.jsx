@@ -357,44 +357,78 @@ function Home() {
           }
         }
         @media (max-width: 600px) {
+          .container {
+            min-height: 100vh;
+            padding: 0 !important;
+            overflow-x: hidden;
+          }
           .content {
-            padding: 1.2rem 0.5rem !important;
+            padding: 1rem 0.3rem !important;
             margin: 0.5rem !important;
             border-radius: 14px !important;
+            max-width: 100vw !important;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.18) !important;
+          }
+          .profileContainer {
+            margin-bottom: 1rem !important;
+            width: 100% !important;
+            min-width: 0 !important;
           }
           .title {
-            font-size: 1.3rem !important;
+            font-size: 1.2rem !important;
+            line-height: 1.2 !important;
           }
           .intro {
             font-size: 1rem !important;
             padding: 0 0.2rem !important;
+            max-width: 98vw !important;
           }
           .techGrid {
-            gap: 0.4rem !important;
+            gap: 0.3rem !important;
+            flex-wrap: wrap !important;
+          }
+          .techBadge {
+            font-size: 0.85rem !important;
+            padding: 0.5rem 0.8rem !important;
           }
           .servicesTitle {
-            font-size: 1.2rem !important;
+            font-size: 1.1rem !important;
+            margin-bottom: 1rem !important;
+          }
+          .servicesGrid {
+            grid-template-columns: 1fr !important;
+            gap: 0.7rem !important;
+            margin-top: 1rem !important;
           }
           .serviceItem {
-            padding: 1.2rem 0.7rem !important;
-            font-size: 0.98rem !important;
+            padding: 1rem 0.5rem !important;
+            font-size: 0.95rem !important;
+            border-radius: 10px !important;
+          }
+          .serviceIcon {
+            font-size: 2rem !important;
+            margin-bottom: 0.7rem !important;
           }
           .ctaText {
-            font-size: 1.05rem !important;
+            font-size: 1rem !important;
+            margin-bottom: 1.2rem !important;
+          }
+          .buttonGroup {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 0.7rem !important;
           }
           .primaryButton, .secondaryButton {
             width: 100% !important;
-            padding: 0.8rem 0 !important;
-            font-size: 1rem !important;
-          }
-          .profileContainer {
-            width: 100% !important;
-            min-width: 0 !important;
+            padding: 0.7rem 0 !important;
+            font-size: 0.98rem !important;
+            border-radius: 10px !important;
           }
           .statusIndicator {
             flex-direction: column !important;
             gap: 2px !important;
-            padding: 0.3rem 0.7rem !important;
+            padding: 0.2rem 0.5rem !important;
+            font-size: 0.85rem !important;
           }
         }
       `}</style>
