@@ -6,7 +6,7 @@ function Projects() {
     {
       title: "Control de Combustible (FuelWise)",
       description:
-        "Sistema completo para el registro, gestión y análisis del consumo de combustible en flotas vehiculares. Incluye panel de control, gestión de vehículos, reportes y registro de usuarios. Proyecto desarrollado en equipo con frontend y backend separados.",
+        "Sistema completo para el registro, gestión y análisis del consumo de combustible en flotas vehiculares. Incluye panel de control, gestión de vehículos, reportes y registro de usuarios. Proyecto desarrollado en equipo con frontend en React y backend en .NET (C#).\n\nFrontend y backend independientes, integrados vía API REST.\n\nColaboradores: Equipo FuelWise.",
       images: [
         "/images/combustible1.png",
         "/images/combustible2.png",
@@ -19,7 +19,7 @@ function Projects() {
     {
       title: "Pixel Odyssey",
       description:
-        "Pixel Odyssey es un juego RPG de exploración y aventuras en un mundo de fantasía pixel art.\n\nCaracterísticas principales:\n- Explora mapas y descubre secretos\n- Combate enemigos y jefes\n- Sistema de inventario y objetos\n- Misiones y diálogos\n- Progresión de niveles\n- Guardado de partida en el navegador\n\nDesarrollado desde cero con HTML, CSS y JavaScript vanilla, este proyecto es ideal para aprender lógica de videojuegos, manipulación del DOM y diseño de interfaces retro.\n\nColaboradores: DavidGR21, Paul Velastegui y equipo.\n\nRepositorio principal y demo en GitHub.",
+        "Pixel Odyssey es un juego RPG de exploración y aventuras en un mundo de fantasía pixel art.\n\nCaracterísticas principales:\n- Explora mapas y descubre secretos\n- Combate enemigos y jefes\n- Sistema de inventario y objetos\n- Misiones y diálogos\n- Progresión de niveles\n- Guardado de partida\n\nDesarrollado en Unity con C#, este proyecto es ideal para aprender lógica de videojuegos, diseño de interfaces retro y programación orientada a objetos.\n\nColaboradores: DavidGR21, Paul Velastegui y equipo.\n\nRepositorio principal y demo en GitHub.",
       images: [
         "/images/pixelj1.png",
         "/images/pixelj2.png",
@@ -33,7 +33,7 @@ function Projects() {
     {
       title: "Farma Ya (Web, Móvil y Backend)",
       description:
-        "Plataforma integral para farmacias: gestión de inventario, ventas y pedidos, con aplicaciones web y móvil conectadas al mismo backend. Incluye panel administrativo, tienda online y app móvil para clientes. Proyecto colaborativo con frontend, backend y móvil (React Native).",
+        "Plataforma integral para farmacias: gestión de inventario, ventas y pedidos, con aplicaciones web y móvil conectadas al mismo backend. Incluye panel administrativo, tienda online y app móvil para clientes. Proyecto colaborativo con frontend en React y backend en NestJS (Node.js).\n\nFrontend, backend y móvil integrados vía API REST.\n\nColaboradores: HamiltonStJJ, Paul Velastegui y equipo.",
       images: [
         "/images/farmaYaWeb1.png",
         "/images/farmaYaWeb2.png",
@@ -51,7 +51,7 @@ function Projects() {
     {
       title: "Marketplace Multiempresa",
       description:
-        "Sistema de marketplace para ventas multiempresa, donde diferentes negocios pueden publicar productos, gestionar inventario y recibir pedidos en una sola plataforma. Incluye panel administrativo, gestión de usuarios, catálogo, carrito de compras y reportes. Proyecto colaborativo con frontend en React y backend en Node.js/Express.\n\nFrontend y backend independientes, con integración vía API REST.\n\nColaboradores: DavidGR21, xxxMichael y equipo.",
+        "Sistema de marketplace para ventas multiempresa, donde diferentes negocios pueden publicar productos, gestionar inventario y recibir pedidos en una sola plataforma. Incluye panel administrativo, gestión de usuarios, catálogo, carrito de compras y reportes. Proyecto colaborativo con frontend en React y backend en Spring Boot (Java).\n\nFrontend y backend independientes, integrados vía API REST.\n\nColaboradores: DavidGR21, xxxMichael y equipo.",
       images: [
         "/images/marketP1.png",
         "/images/marketP2.png",
