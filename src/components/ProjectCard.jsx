@@ -1,5 +1,6 @@
 // components/ProjectCard.jsx
 import { useState, useRef, useEffect } from "react";
+import ReactDOM from "react-dom";
 
 function ProjectCard({ title, description, link, images, frontend, backend }) {
   const [current, setCurrent] = useState(0);
@@ -38,6 +39,124 @@ function ProjectCard({ title, description, link, images, frontend, backend }) {
     setCurrent((prev) => (prev - 1 + images.length) % images.length);
   };
 
+  // Modal para imagen grande (usando portal)
+  const modal = modalOpen && (
+    <div
+      onClick={() => setModalOpen(false)}
+      style={{
+        position: 'fixed',
+        zIndex: 2147483647,
+        inset: 0,
+        width: '100vw',
+        height: '100vh',
+        background: 'rgba(20,24,32,0.98)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 0,
+        backdropFilter: 'blur(4px)',
+      }}
+    >
+      <button
+        onClick={handleModalPrev}
+        style={{
+          position: 'fixed',
+          left: 24,
+          top: '50%',
+          transform: 'translateY(-50%)',
+          fontSize: 32,
+          color: '#fff',
+          background: 'rgba(0,0,0,0.32)',
+          border: 'none',
+          borderRadius: '50%',
+          cursor: 'pointer',
+          zIndex: 2147483647,
+          width: 44,
+          height: 44,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 2px 8px #0006',
+        }}
+        aria-label="Anterior"
+      >&#8592;</button>
+      <div style={{
+        maxWidth: '96vw',
+        maxHeight: '92vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+      }}>
+        <img
+          src={showImage()}
+          alt={title + ' screenshot grande ' + (current + 1)}
+          style={{
+            width: '100%',
+            height: 'auto',
+            maxWidth: '800px',
+            maxHeight: '80vh',
+            borderRadius: 18,
+            boxShadow: '0 8px 40px #000a',
+            border: '3px solid #fff',
+            background: '#fff',
+            objectFit: 'contain',
+            display: 'block',
+            margin: '0 auto',
+            transition: 'box-shadow 0.2s',
+          }}
+          onClick={e => e.stopPropagation()}
+        />
+      </div>
+      <button
+        onClick={handleModalNext}
+        style={{
+          position: 'fixed',
+          right: 24,
+          top: '50%',
+          transform: 'translateY(-50%)',
+          fontSize: 32,
+          color: '#fff',
+          background: 'rgba(0,0,0,0.32)',
+          border: 'none',
+          borderRadius: '50%',
+          cursor: 'pointer',
+          zIndex: 2147483647,
+          width: 44,
+          height: 44,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 2px 8px #0006',
+        }}
+        aria-label="Siguiente"
+      >&#8594;</button>
+      <button
+        onClick={() => setModalOpen(false)}
+        style={{
+          position: 'fixed',
+          top: 32,
+          right: 32,
+          fontSize: 28,
+          color: '#fff',
+          background: 'rgba(0,0,0,0.32)',
+          border: 'none',
+          borderRadius: '50%',
+          cursor: 'pointer',
+          zIndex: 2147483647,
+          width: 40,
+          height: 40,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 2px 8px #0006',
+        }}
+        aria-label="Cerrar"
+      >&#10006;</button>
+    </div>
+  );
+
   return (
     <div className="bg-white/90 p-8 rounded-3xl shadow-2xl hover:shadow-3xl transition duration-300 flex flex-col justify-between h-full border border-gray-100 backdrop-blur-md">
       <div>
@@ -72,7 +191,7 @@ function ProjectCard({ title, description, link, images, frontend, backend }) {
                     fontFamily: 'inherit',
                     letterSpacing: 0.5,
                   }}>
-                    <svg width="18" height="18" fill="none" stroke="#00ffe7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 3v3a1 1 0 0 1-1 1H3m13 0V3m0 18v-3a1 1 0 0 1 1-1h3m-6 0v3m0-6h.01"/></svg>
+                    <svg width="18" height="18" fill="none" stroke="#00ffe7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 3v3a1 1 0 0 1-1 1H3m13 0V3m0 18v-3m0-6h.01"/></svg>
                     Ver más
                   </span>
                 </div>
@@ -101,20 +220,7 @@ function ProjectCard({ title, description, link, images, frontend, backend }) {
           </div>
         )}
       </div>
-      {/* Modal para imagen grande */}
-      {modalOpen && (
-        <div onClick={() => setModalOpen(false)} style={{ position: 'fixed', zIndex: 1000, top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <button onClick={handleModalPrev} style={{ position: 'absolute', left: 40, top: '50%', transform: 'translateY(-50%)', fontSize: 40, color: '#fff', background: 'none', border: 'none', cursor: 'pointer', zIndex: 1001 }} aria-label="Anterior">&#8592;</button>
-          <img
-            src={showImage()}
-            alt={title + ' screenshot grande ' + (current + 1)}
-            style={{ maxWidth: '90vw', maxHeight: '80vh', borderRadius: 24, boxShadow: '0 8px 40px #000a', border: '4px solid #fff', background: '#fff' }}
-            onClick={e => e.stopPropagation()}
-          />
-          <button onClick={handleModalNext} style={{ position: 'absolute', right: 40, top: '50%', transform: 'translateY(-50%)', fontSize: 40, color: '#fff', background: 'none', border: 'none', cursor: 'pointer', zIndex: 1001 }} aria-label="Siguiente">&#8594;</button>
-          <button onClick={() => setModalOpen(false)} style={{ position: 'absolute', top: 30, right: 40, fontSize: 32, color: '#fff', background: 'none', border: 'none', cursor: 'pointer', zIndex: 1001 }} aria-label="Cerrar">&#10006;</button>
-        </div>
-      )}
+      {modalOpen && ReactDOM.createPortal(modal, document.body)}
       <div className="flex flex-row flex-wrap gap-6 mt-2 justify-center items-center github-links-container" style={{ width: '100%', marginTop: 24, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 28 }}>
         {frontend && (
           <a

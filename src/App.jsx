@@ -12,7 +12,7 @@ function App() {
     <>
       <AnimatedBackground />
       <Navbar />
-      <div style={{ minHeight: 'calc(100vh - 70px - 60px)' }}>
+      <div id="main-content" style={{ minHeight: 'calc(100vh - 70px - 60px)', position: 'relative', zIndex: 1 }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
