@@ -6,11 +6,13 @@ import About from './pages/About';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import AnimatedBackground from './components/AnimatedBackground';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <>
       <AnimatedBackground />
+      <ScrollToTop />
       <Navbar />
       <div id="main-content" style={{ minHeight: 'calc(100vh - 70px - 60px)', position: 'relative', zIndex: 1 }}>
         <Routes>

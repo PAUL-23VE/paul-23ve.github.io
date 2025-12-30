@@ -215,7 +215,7 @@ function Home() {
                 {[
                   { icon: "🌐", title: "Desarrollo Web", desc: "Sitios web responsivos y aplicaciones modernas" },
                   { icon: "🗄️", title: "Backend & APIs", desc: "Arquitecturas escalables y APIs robustas" },
-                  { icon: "⚡", title: "Optimización", desc: "Performance y SEO de alto nivel" },
+                  { icon: "⚡", title: "Optimización", desc: "Optimizaciones en alto nivel" },
                 ].map(({ icon, title, desc }) => (
                   <div
                     key={title}
@@ -328,6 +328,73 @@ function Home() {
           .buttonGroup {
             flex-direction: column !important;
             align-items: center !important;
+          }
+        }
+        @media (max-width: 900px) {
+          .content {
+            padding: 2rem 1.2rem !important;
+            margin: 1rem !important;
+          }
+          .title {
+            font-size: 2rem !important;
+          }
+          .intro {
+            font-size: 1.1rem !important;
+          }
+          .servicesGrid {
+            grid-template-columns: 1fr !important;
+            gap: 1rem !important;
+          }
+          .buttonGroup {
+            flex-direction: column !important;
+            align-items: center !important;
+          }
+          .profileContainer {
+            margin-bottom: 1.2rem !important;
+          }
+          .ctaSection {
+            margin-top: 1.2rem !important;
+          }
+        }
+        @media (max-width: 600px) {
+          .content {
+            padding: 1.2rem 0.5rem !important;
+            margin: 0.5rem !important;
+            border-radius: 14px !important;
+          }
+          .title {
+            font-size: 1.3rem !important;
+          }
+          .intro {
+            font-size: 1rem !important;
+            padding: 0 0.2rem !important;
+          }
+          .techGrid {
+            gap: 0.4rem !important;
+          }
+          .servicesTitle {
+            font-size: 1.2rem !important;
+          }
+          .serviceItem {
+            padding: 1.2rem 0.7rem !important;
+            font-size: 0.98rem !important;
+          }
+          .ctaText {
+            font-size: 1.05rem !important;
+          }
+          .primaryButton, .secondaryButton {
+            width: 100% !important;
+            padding: 0.8rem 0 !important;
+            font-size: 1rem !important;
+          }
+          .profileContainer {
+            width: 100% !important;
+            min-width: 0 !important;
+          }
+          .statusIndicator {
+            flex-direction: column !important;
+            gap: 2px !important;
+            padding: 0.3rem 0.7rem !important;
           }
         }
       `}</style>
