@@ -152,10 +152,16 @@
     height: 56px;
     min-height: 56px;
     padding: 0;
+    z-index: 2000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
   }
   .navbar-content {
     height: 56px;
     padding: 0 0.3rem;
+    z-index: 2001;
   }
   .logo {
     font-size: 1rem;
@@ -165,13 +171,20 @@
     text-overflow: ellipsis;
   }
   .hamburger {
+    display: flex !important;
     width: 32px;
     height: 32px;
+    z-index: 2200;
+    background: none;
+    border: none;
+    position: relative;
   }
   .hamburger .bar {
     width: 22px;
     height: 3px;
     margin: 2.5px 0;
+    background: #00ffe7;
+    border-radius: 2px;
   }
   .nav-links {
     position: fixed;
@@ -190,7 +203,7 @@
     opacity: 0;
     pointer-events: none;
     transition: transform 0.32s cubic-bezier(.4,0,.2,1), opacity 0.22s;
-    z-index: 1202;
+    z-index: 2201;
   }
   .nav-links.show {
     transform: translateY(0);
@@ -204,5 +217,13 @@
     width: 90vw;
     text-align: center;
     margin: 0 auto;
+    z-index: 2202;
+  }
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(20,24,32,0.65);
+    z-index: 2200;
+    animation: fadeIn 0.22s;
   }
 }
