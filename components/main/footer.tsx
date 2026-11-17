@@ -32,18 +32,6 @@ export const Footer = () => {
         <div className="mt-6 mb-[10px] text-[15px] text-center">
           &copy; {new Date().getFullYear()} {SITE.name}. Todos los derechos reservados.
         </div>
-        <div className="mb-[20px] text-[13px] text-center text-gray-500">
-          Basado en la plantilla{" "}
-          <Link
-            href="https://github.com/sanidhyy/space-portfolio"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="underline hover:text-gray-300"
-          >
-            Space Portfolio
-          </Link>{" "}
-          (MIT).
-        </div>
       </div>
     </footer>
   );
