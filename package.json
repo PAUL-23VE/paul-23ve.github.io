@@ -1,1 +1,42 @@
-{"homepage":"https://paul-23ve.github.io","name":"mi-portafolio","private":true,"version":"0.0.0","type":"module","scripts":{"dev":"vite","build":"vite build","lint":"eslint .","preview":"vite preview","tailwind:init":"tailwindcss init -p","predeploy":"npm run build","deploy":"gh-pages -d dist"},"dependencies":{"framer-motion":"^12.23.11","lucide-react":"^0.534.0","react":"^19.1.0","react-dom":"^19.1.0","react-icons":"^5.5.0","react-router-dom":"^7.7.1","react-type-animation":"^3.2.0"},"devDependencies":{"@eslint/js":"^9.30.1","@types/react":"^19.1.8","@types/react-dom":"^19.1.6","@vitejs/plugin-react":"^4.6.0","autoprefixer":"^10.4.21","eslint":"^9.30.1","eslint-plugin-react-hooks":"^5.2.0","eslint-plugin-react-refresh":"^0.4.20","gh-pages":"^6.3.0","globals":"^16.3.0","postcss":"^8.5.6","tailwindcss":"^4.1.11","vite":"^7.0.4"}}
+{
+  "name": "portafolio-paul-velastegui",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Portafolio de Paul Velastegui, desarrollador full stack.",
+  "homepage": "https://paul-23ve.github.io",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "preview": "npx serve out",
+    "lint": "eslint .",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d out --dotfiles"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.2",
+    "clsx": "^2.1.1",
+    "maath": "^0.10.8",
+    "next": "16.4.5",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-icons": "^5.7.0",
+    "tailwind-merge": "^3.6.0",
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/three": "^0.187.0",
+    "autoprefixer": "^10.6.2",
+    "eslint": "^10.14.0",
+    "eslint-config-next": "16.4.5",
+    "gh-pages": "^6.3.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^6"
+  }
+}
