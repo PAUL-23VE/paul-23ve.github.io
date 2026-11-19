@@ -2279,6 +2279,22 @@ html {
   font-size: 0.85rem;
   text-align: center;
 }
+.sheet__fallback {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 6px 14px;
+  border: 1.5px solid #b91c1c;
+  border-radius: 999px;
+  color: #b91c1c;
+  font-weight: 700;
+  transition: background 0.2s, color 0.2s;
+}
+.sheet__fallback:hover {
+  background: #b91c1c;
+  color: #fff;
+}
 .sheet__note {
   color: #64748b;
   font-size: 0.8rem;

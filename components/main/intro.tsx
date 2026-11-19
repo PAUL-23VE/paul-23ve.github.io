@@ -46,8 +46,11 @@ export const Intro = () => {
   // La intro no se cierra sola: espera a que el usuario presione una tecla, haga clic/toque
   // o intente desplazarse (rueda o deslizar). Funciona también a mitad de la animación.
   useEffect(() => {
-    if (!play) return;
+    // Al terminar la intro se quitan los escuchadores: si no, seguirían bloqueando
+    // el teclado en todo el portafolio (por ejemplo, en el formulario de contacto)
+    if (!play || gone) return;
     const onKey = (e: KeyboardEvent) => {
+      if (ended.current) return;
       // Ignora teclas modificadoras solas y atajos (Ctrl+R, Ctrl+Shift+I…)
       if (["Shift", "Control", "Alt", "Meta"].includes(e.key) || e.ctrlKey || e.metaKey || e.altKey) return;
       e.preventDefault();
@@ -78,7 +81,7 @@ export const Intro = () => {
       window.removeEventListener("pointermove", onMove);
       // El bloqueo de scroll solo lo quita finish() (en desarrollo React monta los efectos dos veces)
     };
-  }, [play, finish]);
+  }, [play, gone, finish]);
 
   if (!play || gone) return null;
 

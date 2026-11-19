@@ -39,6 +39,7 @@ export const CallUpLetter = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [sending, setSending] = useState(false);
+  const [slow, setSlow] = useState(false);
   const [error, setError] = useState("");
 
   const phaseRef = useRef<Phase>("idle");
@@ -136,10 +137,16 @@ export const CallUpLetter = () => {
     if (honey) return;
 
     setSending(true);
+    setSlow(false);
     setError("");
+    // Si tarda, se avisa; si pasa de 60 s se cancela y se ofrece enviarlo desde el correo
+    const ctrl = new AbortController();
+    const slowTimer = window.setTimeout(() => setSlow(true), 5000);
+    const abortTimer = window.setTimeout(() => ctrl.abort(), 60000);
     try {
       const res = await fetch(FORM_ENDPOINT, {
         method: "POST",
+        signal: ctrl.signal,
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           _subject: `Portafolio · ${reason} — ${name}`,
@@ -156,6 +163,8 @@ export const CallUpLetter = () => {
       if (!res.ok || String(data.success) !== "true") throw new Error(data.message || `HTTP ${res.status}`);
 
       // Enviado: la hoja vuelve al sobre
+      clearTimeout(slowTimer);
+      clearTimeout(abortTimer);
       setSending(false);
       measureFlight();
       go("sending");
@@ -163,11 +172,25 @@ export const CallUpLetter = () => {
         resetForm();
         closeModal("sent");
       }, SEND_MS);
-    } catch {
+    } catch (err) {
+      clearTimeout(slowTimer);
+      clearTimeout(abortTimer);
       setSending(false);
-      setError("No se pudo enviar el mensaje. Revisa tu conexión e inténtalo de nuevo.");
+      const msg = err instanceof Error ? err.message : "";
+      setError(
+        /activat/i.test(msg)
+          ? "El formulario aún se está activando. Mientras tanto, envíame tu mensaje desde tu correo:"
+          : ctrl.signal.aborted
+            ? "El envío está tardando demasiado. Puedes enviármelo desde tu correo:"
+            : "No se pudo enviar el mensaje. Inténtalo de nuevo o envíamelo desde tu correo:",
+      );
     }
   };
+
+  // Alternativa si el envío falla: abre el correo del visitante con todo ya escrito
+  const mailtoHref = `mailto:${SITE.email}?subject=${encodeURIComponent(`Portafolio · ${reason} — ${name}`)}&body=${encodeURIComponent(
+    `${message}\n\n— ${name}${email ? ` (${email})` : ""}`,
+  )}`;
 
   // Si el navegador cerrara el modal por su cuenta, se sincroniza el estado
   const onDialogClose = () => {
@@ -347,7 +370,8 @@ export const CallUpLetter = () => {
                 <button type="submit" className="sheet__send" disabled={sending} aria-busy={sending}>
                   {sending ? (
                     <>
-                      <FaFutbol className="ball-spin h-5 w-5" aria-hidden="true" /> Enviando…
+                      <FaFutbol className="ball-spin h-5 w-5" aria-hidden="true" />
+                      {slow ? "Enviando… puede tardar unos segundos" : "Enviando…"}
                     </>
                   ) : (
                     <>
@@ -357,9 +381,12 @@ export const CallUpLetter = () => {
                 </button>
               </div>
               {error ? (
-                <p className="sheet__error" role="alert">
-                  {error}
-                </p>
+                <div className="sheet__error" role="alert">
+                  <p>{error}</p>
+                  <a href={mailtoHref} className="sheet__fallback">
+                    <HiOutlineEnvelope className="h-4 w-4" aria-hidden="true" /> Enviar desde mi correo
+                  </a>
+                </div>
               ) : (
                 <p className="sheet__note">Tu mensaje me llegará directo al correo.</p>
               )}
