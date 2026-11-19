@@ -19,24 +19,25 @@ const reset = (e: PointerEvent<HTMLButtonElement>) => {
   e.currentTarget.style.setProperty("--ty", "0");
 };
 
-// Órbita interactiva del inicio: cada ficha es una tecnología.
+// Pizarra táctica interactiva del inicio: cada ficha es una tecnología (un "jugador").
 // Al pasar el cursor (o enfocarla con teclado / toque) crece, se inclina en 3D y toma su color.
 export const HeroOrbit = () => {
   return (
     <div className="orbit" role="list" aria-label="Tecnologías que uso">
-      {/* Anillos y guías de fondo */}
+      {/* Pizarra táctica: cancha vista desde arriba */}
       <svg className="orbit__guides" viewBox="0 0 100 100" aria-hidden="true">
-        <circle cx="50" cy="50" r="46" />
-        <circle cx="50" cy="50" r="33" />
-        <circle cx="50" cy="50" r="19" />
-        <line x1="50" y1="0" x2="50" y2="100" />
-        <line x1="0" y1="50" x2="100" y2="50" />
-        <line x1="17" y1="17" x2="83" y2="83" />
-        <line x1="83" y1="17" x2="17" y2="83" />
-        <line x1="0" y1="27" x2="100" y2="27" />
-        <line x1="0" y1="73" x2="100" y2="73" />
-        <line x1="27" y1="0" x2="27" y2="100" />
-        <line x1="73" y1="0" x2="73" y2="100" />
+        <rect x="4" y="3" width="92" height="94" rx="1.5" />
+        <line x1="4" y1="50" x2="96" y2="50" />
+        <circle cx="50" cy="50" r="13" />
+        <circle cx="50" cy="50" r="0.9" className="orbit__spot" />
+        <rect x="25" y="3" width="50" height="17" />
+        <rect x="38" y="3" width="24" height="6.5" />
+        <circle cx="50" cy="14" r="0.8" className="orbit__spot" />
+        <path d="M 41 20 A 10 10 0 0 0 59 20" />
+        <rect x="25" y="80" width="50" height="17" />
+        <rect x="38" y="90.5" width="24" height="6.5" />
+        <circle cx="50" cy="86" r="0.8" className="orbit__spot" />
+        <path d="M 41 80 A 10 10 0 0 1 59 80" />
       </svg>
 
       {HERO_TECH.map(({ name, icon: Icon, color, x, y, faded }, i) => (

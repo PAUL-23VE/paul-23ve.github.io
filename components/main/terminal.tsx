@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 
+import { Reveal } from "@/components/sub/reveal";
 import { SectionHeading } from "@/components/sub/section-heading";
 import { TiltCard } from "@/components/sub/tilt-card";
 import { ABOUT, CERTIFICATES, CONTACT_CHANNELS, CV, PROJECTS, SITE, SKILL_GROUPS } from "@/constants";
@@ -93,9 +94,10 @@ const COMMANDS: Record<string, { desc: string; run: () => ReactNode }> = {
           </div>
         ))}
         <p>
-          <a href={CV.pdf} target="_blank" rel="noreferrer noopener" className="term__link">
-            → abrir CV (PDF)
-          </a>
+          {/* Abre el visor del CV de la sección Certificados (escucha el evento "cv:open") */}
+          <button type="button" onClick={() => window.dispatchEvent(new Event("cv:open"))} className="term__link">
+            → ver CV
+          </button>
         </p>
       </>
     ),
@@ -262,6 +264,8 @@ export const Terminal = () => {
       />
 
       <div className="term-wrap">
+        {/* La ventana se "enciende" como una pantalla */}
+        <Reveal effect="boot">
         <TiltCard max={5} className="term">
           <div className="term__bar" aria-hidden="true">
             <i />
@@ -309,19 +313,22 @@ export const Terminal = () => {
             </form>
           </div>
         </TiltCard>
+        </Reveal>
 
+        {/* Los comandos suben en cascada después de encenderse la pantalla */}
         <div className="term__chips">
-          {["ayuda", ...NAMES, "limpiar"].map((name) => (
-            <button
-              key={name}
-              type="button"
-              onClick={() => {
-                interact();
-                run(name);
-              }}
-            >
-              {name}
-            </button>
+          {["ayuda", ...NAMES, "limpiar"].map((name, i) => (
+            <Reveal key={name} effect="flip" delay={0.7 + i * 0.06}>
+              <button
+                type="button"
+                onClick={() => {
+                  interact();
+                  run(name);
+                }}
+              >
+                {name}
+              </button>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { ProjectCard } from "@/components/sub/project-card";
+import { Reveal } from "@/components/sub/reveal";
 import { SectionHeading } from "@/components/sub/section-heading";
 import { PROJECT_FILTERS, PROJECTS, type ProjectKind } from "@/constants";
 
@@ -24,30 +25,34 @@ export const Projects = () => {
         subtitle="Sistemas completos: en prácticas preprofesionales y construidos en equipo."
       />
 
-      <ul className="proj-stats" aria-label="Resumen">
-        <li>
-          <b>{PROJECTS.length}</b> proyectos
-        </li>
-        <li>
-          <b>{TECH_COUNT}</b> tecnologías
-        </li>
-        <li>
-          <b>{SHOT_COUNT}</b> capturas
-        </li>
-      </ul>
+      <Reveal effect="flip" delay={0.3}>
+        <ul className="proj-stats" aria-label="Resumen">
+          <li>
+            <b>{PROJECTS.length}</b> proyectos
+          </li>
+          <li>
+            <b>{TECH_COUNT}</b> tecnologías
+          </li>
+          <li>
+            <b>{SHOT_COUNT}</b> capturas
+          </li>
+        </ul>
+      </Reveal>
 
+      {/* Los filtros caen y rebotan uno tras otro, como balones */}
       <div className="proj-filters" role="group" aria-label="Filtrar proyectos">
-        {PROJECT_FILTERS.map((f) => (
-          <button
-            key={f.id}
-            type="button"
-            className={`proj-filter ${filter === f.id ? "is-active" : ""}`}
-            aria-pressed={filter === f.id}
-            onClick={() => setFilter(f.id)}
-          >
-            {f.label}
-            <span className="proj-filter__count">{countFor(f.id)}</span>
-          </button>
+        {PROJECT_FILTERS.map((f, i) => (
+          <Reveal key={f.id} effect="drop" delay={0.4 + i * 0.08}>
+            <button
+              type="button"
+              className={`proj-filter ${filter === f.id ? "is-active" : ""}`}
+              aria-pressed={filter === f.id}
+              onClick={() => setFilter(f.id)}
+            >
+              {f.label}
+              <span className="proj-filter__count">{countFor(f.id)}</span>
+            </button>
+          </Reveal>
         ))}
       </div>
 

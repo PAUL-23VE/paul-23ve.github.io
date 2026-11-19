@@ -53,7 +53,7 @@ export const Navbar = () => {
   const activeTitle = NAV_LINKS.find((link) => link.link === active)?.title;
 
   return (
-    <header className="w-full h-[65px] fixed top-0 shadow-lg shadow-[#2A0E61]/50 bg-[#03001427] backdrop-blur-md z-50 px-4 md:px-10">
+    <header className="w-full h-[65px] fixed top-0 shadow-lg shadow-[#0e6145]/50 bg-[#0b131ee6] z-50 px-4 md:px-10">
       <div className="w-full h-full flex items-center justify-between m-auto px-[10px]">
         {/* Logo + nombre */}
         <Link
@@ -63,7 +63,7 @@ export const Navbar = () => {
         >
           <span
             aria-hidden="true"
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-cyan-500 text-sm font-bold text-white shadow-[0_0_18px_#7042f8aa]"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 via-emerald-300 to-amber-400 text-sm font-bold text-white shadow-[0_0_18px_#1ce09faa]"
           >
             PV
           </span>
@@ -75,7 +75,7 @@ export const Navbar = () => {
           aria-label="Principal"
           className="hidden lg:flex h-full flex-row items-center justify-between"
         >
-          <div className="flex items-center gap-1 h-auto border border-[rgba(112,66,248,0.38)] bg-[rgba(3,0,20,0.37)] px-[8px] py-[6px] rounded-full text-gray-200">
+          <div className="flex items-center gap-1 h-auto border border-[rgba(28, 224, 159,0.38)] bg-[rgba(11, 19, 29,0.37)] px-[8px] py-[6px] rounded-full text-gray-200">
             {NAV_LINKS.map((link) => {
               const isActive = link.link === active;
               return (
@@ -101,7 +101,7 @@ export const Navbar = () => {
               rel="noreferrer noopener"
               key={name}
               aria-label={name}
-              className="text-white hover:text-[rgb(160,130,255)] transition"
+              className="text-white hover:text-[rgb(144, 241, 209)] transition"
             >
               <Icon className="h-6 w-6" />
             </Link>
@@ -130,7 +130,7 @@ export const Navbar = () => {
       {isMobileMenuOpen && (
         <div
           id="menu-movil"
-          className="absolute top-[65px] left-0 w-full bg-[#030014] border-b border-[#2A0E61] p-6 flex flex-col items-center text-gray-300 lg:hidden"
+          className="absolute top-[65px] left-0 w-full bg-[#0b131d] border-b border-[#0e6145] p-6 flex flex-col items-center text-gray-300 lg:hidden"
         >
           <nav aria-label="Principal móvil" className="flex flex-col items-center gap-3 text-lg">
             {NAV_LINKS.map((link) => {

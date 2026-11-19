@@ -129,7 +129,8 @@ export const ProjectCard = ({ project, number, reverse = false }: ProjectCardPro
       aria-labelledby={`proj-${number}`}
     >
       {/* ── Escenario 3D ── */}
-      <Reveal from={reverse ? "right" : "left"} className="proj__stage-wrap">
+      {/* La escena se abre como una puerta desde su lado */}
+      <Reveal effect={reverse ? "door-right" : "door-left"} className="proj__stage-wrap">
         <div
           ref={sceneRef}
           className="pscene"
@@ -238,7 +239,7 @@ export const ProjectCard = ({ project, number, reverse = false }: ProjectCardPro
       </Reveal>
 
       {/* ── Información ── */}
-      <Reveal from={reverse ? "left" : "right"} delay={0.1} className="proj__info">
+      <Reveal from={reverse ? "left" : "right"} delay={0.25} className="proj__info">
         <span className="proj__num" aria-hidden="true">{num}</span>
         <div className="flex flex-wrap items-center gap-2">
           <span className="proj__cat">{project.category}</span>

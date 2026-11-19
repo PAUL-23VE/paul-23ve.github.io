@@ -19,7 +19,7 @@ export const Footer = () => {
                   href={link}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="flex flex-row items-center my-[12px] hover:text-[rgb(160,130,255)] transition"
+                  className="flex flex-row items-center my-[12px] hover:text-[rgb(144, 241, 209)] transition"
                 >
                   {Icon && <Icon />}
                   <span className="text-[15px] ml-[6px]">{name}</span>

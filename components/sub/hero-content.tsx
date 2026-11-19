@@ -1,5 +1,5 @@
-import { SparklesIcon } from "@heroicons/react/24/solid";
 import type { CSSProperties } from "react";
+import { FaFutbol } from "react-icons/fa";
 
 import { HeroOrbit } from "@/components/sub/hero-orbit";
 import { SITE } from "@/constants";
@@ -15,9 +15,9 @@ export const HeroContent = () => {
         <div
           data-reveal="in"
           style={enter("0px", "-40px", 0.2)}
-          className="Welcome-box py-[8px] px-[10px] border border-[#7042f88b]"
+          className="Welcome-box py-[8px] px-[10px] border border-[#1ce09f8b]"
         >
-          <SparklesIcon className="text-[#b49bff] mr-[10px] h-5 w-5" />
+          <FaFutbol className="ball-spin text-[#a6f4da] mr-[10px] h-[18px] w-[18px]" aria-hidden="true" />
           <p className="Welcome-text text-[13px]">
             {SITE.role} · {SITE.location}
           </p>
@@ -29,7 +29,7 @@ export const HeroContent = () => {
           className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-bold text-white max-w-[640px] leading-tight"
         >
           Hola, soy{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-emerald-300 to-amber-400">
             {SITE.name}
           </span>
           .
@@ -58,16 +58,15 @@ export const HeroContent = () => {
           </a>
           <a
             href="#contact"
-            className="py-3 px-8 text-center text-white cursor-pointer rounded-lg border border-[#7042f88b] hover:bg-[#7042f822] transition"
+            className="py-3 px-8 text-center text-white cursor-pointer rounded-lg border border-[#1ce09f8b] hover:bg-[#1ce09f22] transition"
           >
             Contáctame
           </a>
           {SITE.cv && (
             <a
               href={SITE.cv}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="py-3 px-8 text-center text-white cursor-pointer rounded-lg border border-[#7042f88b] hover:bg-[#7042f822] transition"
+              download="CV-Paul-Velastegui.pdf"
+              className="py-3 px-8 text-center text-white cursor-pointer rounded-lg border border-[#1ce09f8b] hover:bg-[#1ce09f22] transition"
             >
               Descargar CV
             </a>

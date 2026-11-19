@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from "react";
 import {
   HiChevronLeft, HiChevronRight, HiOutlineAcademicCap, HiOutlineArrowDownTray,
   HiOutlineArrowTopRightOnSquare, HiOutlineBriefcase, HiOutlineCheckBadge,
-  HiOutlineMagnifyingGlassPlus,
+  HiOutlineEye, HiOutlineMagnifyingGlassPlus,
 } from "react-icons/hi2";
 
 import { Lightbox, type LightboxItem } from "@/components/sub/lightbox";
@@ -46,6 +46,13 @@ const RANGE = `${Math.min(...years)} – ${Math.max(...years)}`;
 export const Certificates = () => {
   const [active, setActive] = useState(0);
   const [viewer, setViewer] = useState<{ items: ReadonlyArray<LightboxItem>; index: number } | null>(null);
+
+  // Otras secciones (p. ej. el comando "cv" de la terminal) piden abrir el visor del CV
+  useEffect(() => {
+    const openCv = () => setViewer({ items: CV_ITEMS, index: 0 });
+    window.addEventListener("cv:open", openCv);
+    return () => window.removeEventListener("cv:open", openCv);
+  }, []);
   const swipe = useRef<{ x: number; moved: boolean } | null>(null);
 
   const go = (step: number) => setActive((i) => (i + step + N) % N);
@@ -101,7 +108,8 @@ export const Certificates = () => {
         <li>{RANGE}</li>
       </ul>
 
-      {/* ── Carrusel 3D de certificados ── */}
+      {/* ── Carrusel 3D de certificados (entra desde la profundidad) ── */}
+      <Reveal effect="depth" delay={0.1} className="w-full">
       <div
         className="coverflow"
         role="group"
@@ -144,6 +152,7 @@ export const Certificates = () => {
           );
         })}
       </div>
+      </Reveal>
 
       {/* Controles */}
       <div className="cf-controls">
@@ -195,7 +204,8 @@ export const Certificates = () => {
 
       {/* ── CV ── */}
       <div className="cv-block">
-        <Reveal from="left" className="cv-stage">
+        {/* El CV aterriza girando; el resumen se abre como una puerta */}
+        <Reveal effect="drop" className="cv-stage">
           <TiltCard max={10} className="cv-paper">
             <button
               type="button"
@@ -215,7 +225,7 @@ export const Certificates = () => {
           </TiltCard>
         </Reveal>
 
-        <Reveal from="right" delay={0.1} className="flex flex-col gap-5">
+        <Reveal effect="door-right" delay={0.15} className="flex flex-col gap-5">
           <div>
             <p className="cv-kicker">Mi CV</p>
             <h3 className="text-3xl font-semibold text-white">Currículum</h3>
@@ -243,14 +253,14 @@ export const Certificates = () => {
           ))}
 
           <p className="flex items-start gap-3 text-gray-300">
-            <HiOutlineAcademicCap className="mt-0.5 h-6 w-6 shrink-0 text-[#b49bff]" aria-hidden="true" />
+            <HiOutlineAcademicCap className="mt-0.5 h-6 w-6 shrink-0 text-[#a6f4da]" aria-hidden="true" />
             {CV.education}
           </p>
 
           <div className="flex flex-wrap gap-3">
-            <a href={CV.pdf} target="_blank" rel="noreferrer noopener" className="doc-btn">
-              <HiOutlineArrowTopRightOnSquare className="h-5 w-5" /> Ver CV
-            </a>
+            <button type="button" onClick={() => setViewer({ items: CV_ITEMS, index: 0 })} className="doc-btn">
+              <HiOutlineEye className="h-5 w-5" /> Ver CV
+            </button>
             <a href={CV.pdf} download={CV.downloadName} className="doc-btn doc-btn--solid">
               <HiOutlineArrowDownTray className="h-5 w-5" /> Descargar CV
             </a>

@@ -12,11 +12,12 @@ type SkillDataProviderProps = {
 
 // Logo de una tecnología con efecto 3D: se inclina hacia el cursor y sobresale, sin tarjeta.
 export const SkillDataProvider = ({ skill, index }: SkillDataProviderProps) => {
-  const { skill_name: name, image, icon: Icon, color = "#b49bff", size } = skill;
+  const { skill_name: name, image, icon: Icon, color = "#a6f4da", size } = skill;
   const logo = size;
 
   return (
-    <Reveal delay={index * 0.06}>
+    // Cada logo gira como una moneda desde el fondo, en cascada
+    <Reveal effect="coin" delay={index * 0.07}>
       <TiltCard max={20} className="skill-tile" style={{ "--brand": color } as CSSProperties}>
         <span className="skill-tile__logo">
           {image ? (

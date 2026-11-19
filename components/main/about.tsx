@@ -22,12 +22,13 @@ export const About = () => {
       />
 
       <div className="w-full max-w-6xl grid grid-cols-1 gap-8 md:grid-cols-[300px_minmax(0,1fr)] items-start">
-        <Reveal from="left">
+        {/* La tarjeta con la foto se abre como una puerta */}
+        <Reveal effect="door-left">
           <TiltCard max={6} className="glass-card p-6 flex flex-col gap-3">
             <div className="tilt__pop relative">
               <div
                 aria-hidden="true"
-                className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-purple-500 to-cyan-500 opacity-60 blur-md"
+                className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-emerald-400 via-emerald-300 to-amber-400 opacity-60 blur-md"
               />
               <Image
                 src={SITE.photo}
@@ -40,20 +41,20 @@ export const About = () => {
             <h3 className="text-xl font-semibold text-white mt-2">{SITE.name}</h3>
             <p className="text-gray-400">{SITE.role}</p>
             <p className="flex items-center gap-2 text-sm text-emerald-400">
-              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]" />
+              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_#24a67b]" />
               Disponible para proyectos
             </p>
-            <ul className="mt-2 pt-4 border-t border-[#7042f861] flex flex-col gap-3 text-sm text-gray-300">
+            <ul className="mt-2 pt-4 border-t border-[#1ce09f61] flex flex-col gap-3 text-sm text-gray-300">
               <li className="flex gap-3">
-                <HiOutlineAcademicCap className="h-5 w-5 shrink-0 text-[#b49bff]" />
+                <HiOutlineAcademicCap className="h-5 w-5 shrink-0 text-[#a6f4da]" />
                 {SITE.career} · {SITE.university}
               </li>
               <li className="flex gap-3">
-                <HiOutlineMapPin className="h-5 w-5 shrink-0 text-[#b49bff]" />
+                <HiOutlineMapPin className="h-5 w-5 shrink-0 text-[#a6f4da]" />
                 {SITE.location}
               </li>
               <li className="flex gap-3">
-                <HiOutlineUsers className="h-5 w-5 shrink-0 text-[#b49bff]" />
+                <HiOutlineUsers className="h-5 w-5 shrink-0 text-[#a6f4da]" />
                 {PROJECTS.length} proyectos, uno en prácticas
               </li>
             </ul>
@@ -62,23 +63,25 @@ export const About = () => {
 
         <div className="flex flex-col gap-5">
           {ABOUT.map((paragraph, i) => (
-            <p
-              key={i}
-              className={
-                i === 0
-                  ? "text-xl md:text-2xl text-white leading-snug"
-                  : "text-lg text-gray-300"
-              }
-            >
-              {paragraph}
-            </p>
+            <Reveal key={i} from="right" delay={0.15 + i * 0.12}>
+              <p
+                className={
+                  i === 0
+                    ? "text-xl md:text-2xl text-white leading-snug"
+                    : "text-lg text-gray-300"
+                }
+              >
+                {paragraph}
+              </p>
+            </Reveal>
           ))}
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 mt-6">
             {SERVICES.map((service, i) => {
               const Icon = SERVICE_ICONS[i];
               return (
-                <Reveal key={service.title} delay={i * 0.12} className="h-full">
+                // Las tarjetas se reparten como cartas, una tras otra
+                <Reveal key={service.title} effect="deal" delay={0.2 + i * 0.15} className="h-full">
                   <TiltCard className="service-card h-full p-5 flex flex-col">
                     <div className="flex items-start justify-between">
                       <span className="tilt__pop service-card__icon">
@@ -96,7 +99,7 @@ export const About = () => {
                       {service.tags.map((tag) => (
                         <li
                           key={tag}
-                          className="rounded-full border border-[#7042f861] bg-[#7042f81f] px-2.5 py-0.5 text-[11px] text-gray-200"
+                          className="rounded-full border border-[#1ce09f61] bg-[#1ce09f1f] px-2.5 py-0.5 text-[11px] text-gray-200"
                         >
                           {tag}
                         </li>
