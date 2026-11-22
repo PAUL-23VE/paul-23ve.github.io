@@ -25,7 +25,7 @@ export const SITE = {
   career: "Ingeniería de Software",
   email: "paulvelastegui2016@gmail.com",
   url: "https://paul-23ve.github.io",
-  photo: "/images/PERFIL1.png",
+  photo: "/images/perfil.webp",
   // CV publicado (copia sin la cédula). Activa el botón "Descargar CV" del inicio.
   cv: "/cv/cv-paul-velastegui.pdf",
   whatsapp: "https://wa.me/593978954385",
