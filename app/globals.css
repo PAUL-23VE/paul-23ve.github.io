@@ -2543,36 +2543,6 @@ html.intro-skip .intro {
     opacity: 1;
   }
 }
-/* Franjas de cine que entran al empezar y se abren al aparecer el nombre */
-.intro__bars::before,
-.intro__bars::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 8vh;
-  background: #05090f;
-  transition: transform 1.2s cubic-bezier(0.7, 0, 0.2, 1);
-  pointer-events: none;
-}
-.intro__bars::before {
-  top: 0;
-  transform: translateY(-100%);
-}
-.intro__bars::after {
-  bottom: 0;
-  transform: translateY(100%);
-}
-.intro.is-playing .intro__bars::before,
-.intro.is-playing .intro__bars::after {
-  transform: none;
-}
-.intro.is-impact .intro__bars::before {
-  transform: translateY(-100%);
-}
-.intro.is-impact .intro__bars::after {
-  transform: translateY(100%);
-}
 /* Viñeta: oscurece los bordes y la parte baja para que el nombre se lea */
 .intro__vignette {
   position: absolute;

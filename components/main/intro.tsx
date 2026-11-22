@@ -136,13 +136,12 @@ export const Intro = () => {
       {/* Pantalla de carga mientras llega la escena 3D */}
       <div className="intro__loader" role="status" aria-live="polite">
         <FaFutbol className="intro__loader-ball" aria-hidden="true" />
-        <span>Preparando el estadio…</span>
+        <span>Preparando el portafolio…</span>
         <span className="intro__loader-bar" aria-hidden="true">
           <span />
         </span>
       </div>
       <div className="intro__vignette" aria-hidden="true" />
-      <div className="intro__bars" aria-hidden="true" />
       <div className="intro__flash" aria-hidden="true" />
       <div className="intro__ring" aria-hidden="true" />
 
