@@ -29,6 +29,11 @@ const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)"
 // formulario y lo reenvía al correo asociado a la clave (CONTACT_FORM_KEY en constants).
 // Mientras no haya clave, "Enviar" abre el correo del visitante con el mensaje ya escrito.
 const FORM_ENDPOINT = "https://api.web3forms.com/submit";
+const toFormData = (fields: Record<string, string>) => {
+  const fd = new FormData();
+  for (const [k, v] of Object.entries(fields)) fd.append(k, v);
+  return fd;
+};
 
 // Contacto: un sobre con sello de balón. Al abrirlo, la hoja sale a un modal con el
 // formulario. Cancelar rompe la hoja; enviar la manda a mi correo y la devuelve al sobre.
@@ -159,8 +164,9 @@ export const CallUpLetter = () => {
       const res = await fetch(FORM_ENDPOINT, {
         method: "POST",
         signal: ctrl.signal,
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
+        // FormData (y no JSON): es una petición simple, sin consulta previa CORS que el servicio rechace
+        headers: { Accept: "application/json" },
+        body: toFormData({
           access_key: CONTACT_FORM_KEY,
           subject: `Portafolio · ${reason} — ${name}`,
           from_name: "Portafolio Paul Velastegui",

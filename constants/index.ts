@@ -15,7 +15,7 @@ import { TbBrandCSharp } from "react-icons/tb";
 // Clave de Web3Forms para el formulario de contacto (pública por diseño: solo permite
 // enviar mensajes a tu correo). Se obtiene gratis en https://web3forms.com escribiendo tu
 // correo; llega al instante. Vacía = el botón "Enviar" abre el correo del visitante.
-export const CONTACT_FORM_KEY = "";
+export const CONTACT_FORM_KEY = "7671035b-6738-4800-9c77-9751626da139";
 
 export const SITE = {
   name: "Paul Velastegui",
