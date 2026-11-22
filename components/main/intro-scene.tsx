@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Suspense, useEffect, useMemo, useRef } from "react";
+import { Component, Suspense, useEffect, useMemo, useRef, type ReactNode } from "react";
 import * as THREE from "three";
 
 import { usePlayer, type PlayerRig } from "@/components/main/intro-player";
@@ -716,7 +716,21 @@ function Stage() {
   );
 }
 
-export default function IntroScene(props: Cb) {
+// Si el modelo no se puede descargar, se avisa (la intro se cierra) en lugar de romper la página
+class LoadGuard extends Component<{ onError: () => void; children: ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  componentDidCatch() {
+    this.props.onError();
+  }
+  render() {
+    return this.state.failed ? null : this.props.children;
+  }
+}
+
+export default function IntroScene({ onError, ...props }: Cb & { onError: () => void }) {
   return (
     <Canvas
       className="intro__canvas"
@@ -726,9 +740,11 @@ export default function IntroScene(props: Cb) {
       gl={{ antialias: true, powerPreference: "high-performance", stencil: false, toneMapping: THREE.ACESFilmicToneMapping }}
     >
       <Stage />
-      <Suspense fallback={null}>
-        <Game {...props} />
-      </Suspense>
+      <LoadGuard onError={onError}>
+        <Suspense fallback={null}>
+          <Game {...props} />
+        </Suspense>
+      </LoadGuard>
     </Canvas>
   );
 }

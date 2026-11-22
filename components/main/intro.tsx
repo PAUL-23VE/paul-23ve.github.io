@@ -2,6 +2,8 @@
 
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { preload } from "react-dom";
+import { FaFutbol } from "react-icons/fa";
 
 import { SITE } from "@/constants";
 import { INTRO_KEY } from "@/lib/intro";
@@ -9,7 +11,22 @@ import { INTRO_KEY } from "@/lib/intro";
 // Intro antes del portafolio: escena 3D estilo videojuego (components/main/intro-scene.tsx).
 // Un futbolista entra corriendo, dispara a la cámara y aparece tu nombre; luego celebra
 // hasta que el usuario presiona algo o se desplaza. Solo existe en el navegador.
-const IntroScene = dynamic(() => import("@/components/main/intro-scene"), { ssr: false });
+const loadScene = () => import("@/components/main/intro-scene");
+const IntroScene = dynamic(loadScene, { ssr: false });
+
+// ¿El navegador puede dibujar 3D? Si no, la intro se salta (el portafolio funciona igual)
+let webgl: boolean | null = null;
+const hasWebGL = () => {
+  if (webgl === null) {
+    try {
+      const c = document.createElement("canvas");
+      webgl = !!(c.getContext("webgl2") || c.getContext("webgl"));
+    } catch {
+      webgl = false;
+    }
+  }
+  return webgl;
+};
 
 // ¿Hay que mostrar la intro? Lo decide el script de <head> (lib/intro.ts) con una clase en <html>.
 // En el servidor y durante la hidratación se asume que sí (el CSS ya la oculta si no toca).
@@ -18,6 +35,11 @@ const shouldPlay = () => !document.documentElement.classList.contains("intro-ski
 
 export const Intro = () => {
   const play = useSyncExternalStore(subscribe, shouldPlay, () => true);
+  const gl = useSyncExternalStore(subscribe, hasWebGL, () => false);
+  // El modelo y las animaciones se descargan desde el primer instante, en paralelo
+  // con el JavaScript (van como <link rel="preload"> en el HTML)
+  preload("/intro/player.glb", { as: "fetch", crossOrigin: "anonymous" });
+  preload("/intro/moves.glb", { as: "fetch", crossOrigin: "anonymous" });
   const [gone, setGone] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const ended = useRef(false);
@@ -69,10 +91,14 @@ export const Intro = () => {
       root.style.setProperty("--my", ((e.clientY / window.innerHeight) * 2 - 1).toFixed(3));
     };
     window.addEventListener("pointermove", onMove, { passive: true });
-    // Si la escena 3D no llegara a cargar, la intro no debe bloquear la página
+    // Sin WebGL no hay escena: se entra directo. Si hay WebGL se espera a que cargue
+    // aunque la conexión sea lenta (se ve la pantalla de carga y se puede entrar con una
+    // tecla); solo si pasa demasiado tiempo se entra sola.
+    if (!hasWebGL()) finish();
+    else void loadScene();
     const failsafe = window.setTimeout(() => {
       if (!started.current) finish();
-    }, 9000);
+    }, 45000);
     return () => {
       clearTimeout(failsafe);
       window.removeEventListener("keydown", onKey);
@@ -106,7 +132,15 @@ export const Intro = () => {
 
   return (
     <div ref={rootRef} className="intro" aria-label="Introducción" onClick={finish}>
-      <IntroScene onStart={start} onReady={ready} onImpact={impact} />
+      {gl && <IntroScene onStart={start} onReady={ready} onImpact={impact} onError={finish} />}
+      {/* Pantalla de carga mientras llega la escena 3D */}
+      <div className="intro__loader" role="status" aria-live="polite">
+        <FaFutbol className="intro__loader-ball" aria-hidden="true" />
+        <span>Preparando el estadio…</span>
+        <span className="intro__loader-bar" aria-hidden="true">
+          <span />
+        </span>
+      </div>
       <div className="intro__vignette" aria-hidden="true" />
       <div className="intro__bars" aria-hidden="true" />
       <div className="intro__flash" aria-hidden="true" />

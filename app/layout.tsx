@@ -5,7 +5,7 @@ import type { PropsWithChildren } from "react";
 import { Footer } from "@/components/main/footer";
 import { Intro } from "@/components/main/intro";
 import { Navbar } from "@/components/main/navbar";
-import { StadiumScene } from "@/components/main/stadium-scene";
+import { StadiumBackground } from "@/components/main/stadium-bg";
 import { CursorFx } from "@/components/sub/cursor-fx";
 import { siteConfig } from "@/config";
 import { INTRO_SCRIPT } from "@/lib/intro";
@@ -43,7 +43,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <script id="intro-gate" dangerouslySetInnerHTML={{ __html: INTRO_SCRIPT }} suppressHydrationWarning />
         <Intro />
         <CursorFx />
-        <StadiumScene />
+        <StadiumBackground />
         <Navbar />
         {children}
         <Footer />
