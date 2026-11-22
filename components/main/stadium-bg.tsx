@@ -24,9 +24,16 @@ const hasWebGL = () => {
   }
   return webgl;
 };
-const subscribe = () => () => {};
+// Mientras se ve la intro (html.intro-lock) el estadio queda tapado: se descarga después,
+// así todo el ancho de banda inicial va para la intro.
+const subscribe = (cb: () => void) => {
+  const mo = new MutationObserver(cb);
+  mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+  return () => mo.disconnect();
+};
+const canShow = () => hasWebGL() && !document.documentElement.classList.contains("intro-lock");
 
 export const StadiumBackground = () => {
-  const ok = useSyncExternalStore(subscribe, hasWebGL, () => false);
+  const ok = useSyncExternalStore(subscribe, canShow, () => false);
   return ok ? <StadiumScene /> : null;
 };
