@@ -12,6 +12,11 @@ import {
 } from "react-icons/si";
 import { TbBrandCSharp } from "react-icons/tb";
 
+// Clave de Web3Forms para el formulario de contacto (pública por diseño: solo permite
+// enviar mensajes a tu correo). Se obtiene gratis en https://web3forms.com escribiendo tu
+// correo; llega al instante. Vacía = el botón "Enviar" abre el correo del visitante.
+export const CONTACT_FORM_KEY = "";
+
 export const SITE = {
   name: "Paul Velastegui",
   role: "Desarrollador Full Stack",

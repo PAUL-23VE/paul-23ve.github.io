@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { FaFutbol } from "react-icons/fa";
 import { HiCheck, HiOutlineEnvelope, HiOutlinePaperAirplane, HiXMark } from "react-icons/hi2";
 
-import { SITE } from "@/constants";
+import { CONTACT_FORM_KEY, SITE } from "@/constants";
 
 const REASONS = ["Propuesta laboral", "Proyecto freelance", "Colaboración", "Solo un saludo"] as const;
 
@@ -25,10 +25,10 @@ const CLIP_R = `polygon(100% 0, ${EDGE}, 100% 100%)`;
 
 const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// Envío sin servidor propio ni base de datos: FormSubmit (https://formsubmit.co) recibe el
-// formulario y lo reenvía al correo. La primera vez envía un correo de activación a esa
-// dirección: hay que abrirlo y confirmar una sola vez; desde ahí llegan todos los mensajes.
-const FORM_ENDPOINT = `https://formsubmit.co/ajax/${SITE.email}`;
+// Envío sin servidor propio ni base de datos: Web3Forms (https://web3forms.com) recibe el
+// formulario y lo reenvía al correo asociado a la clave (CONTACT_FORM_KEY en constants).
+// Mientras no haya clave, "Enviar" abre el correo del visitante con el mensaje ya escrito.
+const FORM_ENDPOINT = "https://api.web3forms.com/submit";
 
 // Contacto: un sobre con sello de balón. Al abrirlo, la hoja sale a un modal con el
 // formulario. Cancelar rompe la hoja; enviar la manda a mi correo y la devuelve al sobre.
@@ -133,8 +133,20 @@ export const CallUpLetter = () => {
     e.preventDefault();
     if (phaseRef.current !== "open" || sending) return;
     // Trampa para bots: un campo oculto que una persona nunca llena
-    const honey = (e.currentTarget.elements.namedItem("_honey") as HTMLInputElement | null)?.value;
+    const honey = (e.currentTarget.elements.namedItem("botcheck") as HTMLInputElement | null)?.value;
     if (honey) return;
+
+    // Sin clave del servicio: se abre el correo del visitante con todo ya escrito
+    if (!CONTACT_FORM_KEY) {
+      window.location.href = mailtoHref;
+      measureFlight();
+      go("sending");
+      later(() => {
+        resetForm();
+        closeModal("sent");
+      }, SEND_MS);
+      return;
+    }
 
     setSending(true);
     setSlow(false);
@@ -149,10 +161,10 @@ export const CallUpLetter = () => {
         signal: ctrl.signal,
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          _subject: `Portafolio · ${reason} — ${name}`,
-          _template: "table",
-          _captcha: "false",
-          _replyto: email, // al responder desde Gmail, la respuesta va al visitante
+          access_key: CONTACT_FORM_KEY,
+          subject: `Portafolio · ${reason} — ${name}`,
+          from_name: "Portafolio Paul Velastegui",
+          replyto: email, // al responder desde Gmail, la respuesta va al visitante
           Nombre: name,
           Correo: email,
           Motivo: reason,
@@ -178,8 +190,8 @@ export const CallUpLetter = () => {
       setSending(false);
       const msg = err instanceof Error ? err.message : "";
       setError(
-        /activat/i.test(msg)
-          ? "El formulario aún se está activando. Mientras tanto, envíame tu mensaje desde tu correo:"
+        /access.?key/i.test(msg)
+          ? "El formulario no está disponible ahora. Envíame tu mensaje desde tu correo:"
           : ctrl.signal.aborted
             ? "El envío está tardando demasiado. Puedes enviármelo desde tu correo:"
             : "No se pudo enviar el mensaje. Inténtalo de nuevo o envíamelo desde tu correo:",
@@ -209,7 +221,8 @@ export const CallUpLetter = () => {
       <p className="callup__hint" aria-live="polite">
         {phase === "sent" ? (
           <>
-            <HiCheck className="h-4 w-4" aria-hidden="true" /> ¡Mensaje enviado! Te responderé pronto.
+            <HiCheck className="h-4 w-4" aria-hidden="true" />{" "}
+            {CONTACT_FORM_KEY ? "¡Mensaje enviado! Te responderé pronto." : "¡Listo! Termina de enviarlo desde tu correo."}
           </>
         ) : (
           <>
@@ -332,7 +345,7 @@ export const CallUpLetter = () => {
               </label>
 
               {/* Trampa para bots: invisible para las personas */}
-              <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="sheet__honey" aria-hidden="true" />
+              <input type="text" name="botcheck" tabIndex={-1} autoComplete="off" className="sheet__honey" aria-hidden="true" />
 
               <fieldset className="sheet__field">
                 <legend>¿De qué se trata?</legend>
@@ -388,7 +401,9 @@ export const CallUpLetter = () => {
                   </a>
                 </div>
               ) : (
-                <p className="sheet__note">Tu mensaje me llegará directo al correo.</p>
+                <p className="sheet__note">
+                  {CONTACT_FORM_KEY ? "Tu mensaje me llegará directo al correo." : "Se abrirá tu correo con el mensaje listo para enviar."}
+                </p>
               )}
             </form>
           </div>
