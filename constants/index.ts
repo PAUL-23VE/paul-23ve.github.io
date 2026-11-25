@@ -64,6 +64,18 @@ export const ABOUT = [
   "Fuera del código juego fútbol, y de ahí me llevo lo mismo que aplico en cada proyecto: trabajo en equipo, constancia y ganas de mejorar en cada partido.",
 ] as const;
 
+// Objetivo profesional (se muestra destacado en "Sobre mí")
+export const OBJECTIVE =
+  "Crecer como desarrollador full stack aportando a equipos que construyen productos web reales: interfaces cuidadas con React y APIs sólidas con Node.js y NestJS, con código limpio, buenas prácticas y entregas que generen valor para el negocio.";
+
+// Hobbies e intereses fuera del código (se muestran en "Sobre mí"). Ajústalos a tu gusto.
+export const HOBBIES = [
+  { name: "Fútbol", emoji: "⚽" },
+  { name: "Videojuegos y su desarrollo", emoji: "🎮" },
+  { name: "Aprender tecnologías nuevas", emoji: "🚀" },
+  { name: "Trabajo en equipo", emoji: "🤝" },
+] as const;
+
 export const SERVICES = [
   {
     title: "Desarrollo web",
@@ -428,6 +440,7 @@ export const NAV_LINKS = [
   { title: "Sobre mí", link: "#about-me" },
   { title: "Habilidades", link: "#skills" },
   { title: "Terminal", link: "#terminal" },
+  { title: "Experiencia", link: "#experience" },
   { title: "Proyectos", link: "#projects" },
   { title: "Certificados", link: "#certificates" },
   { title: "Contacto", link: "#contact" },

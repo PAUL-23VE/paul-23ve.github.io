@@ -18,15 +18,21 @@ const useActiveSection = () => {
       frame = 0;
       // Un apartado cuenta como "actual" cuando su inicio pasa el tercio superior de la pantalla.
       const line = window.innerHeight * 0.35;
+      // Gana el apartado que cruzó la línea más recientemente (el de inicio más bajo),
+      // sin depender del orden de NAV_LINKS (Experiencia está dentro de Certificados).
       let current = "";
+      let best = -Infinity;
       for (const id of ids) {
-        const el = document.getElementById(id);
-        if (el && el.getBoundingClientRect().top <= line) current = `#${id}`;
+        const top = document.getElementById(id)?.getBoundingClientRect().top;
+        if (top !== undefined && top <= line && top > best) {
+          best = top;
+          current = `#${id}`;
+        }
       }
       // Al llegar al final de la página, el último apartado gana aunque sea corto.
       const atBottom =
         window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
-      if (atBottom) current = `#${ids[ids.length - 1]}`;
+      if (atBottom) current = "#contact";
       setActive(current);
     };
 

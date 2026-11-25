@@ -203,7 +203,7 @@ export const Certificates = () => {
       </div>
 
       {/* ── CV ── */}
-      <div className="cv-block">
+      <div id="experience" className="cv-block scroll-mt-24">
         {/* El CV aterriza girando; el resumen se abre como una puerta */}
         <Reveal effect="drop" className="cv-stage">
           <TiltCard max={10} className="cv-paper">

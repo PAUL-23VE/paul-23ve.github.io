@@ -1,13 +1,13 @@
 import Image from "next/image";
 import {
   HiOutlineAcademicCap, HiOutlineCodeBracket, HiOutlineMapPin, HiOutlineServerStack,
-  HiOutlineUserGroup, HiOutlineUsers,
+  HiOutlineFlag, HiOutlineUserGroup, HiOutlineUsers,
 } from "react-icons/hi2";
 
 import { Reveal } from "@/components/sub/reveal";
 import { SectionHeading } from "@/components/sub/section-heading";
 import { TiltCard } from "@/components/sub/tilt-card";
-import { ABOUT, PROJECTS, SERVICES, SITE } from "@/constants";
+import { ABOUT, HOBBIES, OBJECTIVE, PROJECTS, SERVICES, SITE } from "@/constants";
 
 // Un icono por tarjeta de servicio, en el mismo orden que SERVICES.
 const SERVICE_ICONS = [HiOutlineCodeBracket, HiOutlineServerStack, HiOutlineUserGroup];
@@ -76,6 +76,19 @@ export const About = () => {
             </Reveal>
           ))}
 
+          {/* Objetivo profesional */}
+          <Reveal from="right" delay={0.5}>
+            <div className="objective-card">
+              <span className="objective-card__icon" aria-hidden="true">
+                <HiOutlineFlag className="h-6 w-6" />
+              </span>
+              <div>
+                <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-[#a6f4da]">Objetivo profesional</h3>
+                <p className="mt-1.5 text-gray-200">{OBJECTIVE}</p>
+              </div>
+            </div>
+          </Reveal>
+
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 mt-6">
             {SERVICES.map((service, i) => {
               const Icon = SERVICE_ICONS[i];
@@ -110,6 +123,20 @@ export const About = () => {
               );
             })}
           </div>
+
+          {/* Hobbies e intereses */}
+          <Reveal from="right" delay={0.3}>
+            <div className="mt-2">
+              <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-[#a6f4da]">Fuera del código</h3>
+              <ul className="mt-3 flex flex-wrap gap-2.5" aria-label="Hobbies e intereses">
+                {HOBBIES.map((hobby) => (
+                  <li key={hobby.name} className="hobby-chip">
+                    <span aria-hidden="true">{hobby.emoji}</span> {hobby.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
