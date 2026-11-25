@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⚽ Paul Velastegui · Portafolio
+# Paul Velastegui · Portafolio
 
 **Desarrollador Full Stack** · Estudiante de Ingeniería de Software · Universidad Técnica de Ambato, Ecuador
 
@@ -8,13 +8,13 @@
 
 </div>
 
-Portafolio personal con temática de **fútbol nocturno**: un estadio en 3D que acompaña el recorrido de la página, una intro estilo videojuego y un formulario de contacto que envía los mensajes directo al correo.
+Portafolio profesional con mi perfil, experiencia, proyectos, certificados y CV. Incluye escenas 3D interactivas, una intro animada y un formulario de contacto que envía los mensajes directo al correo.
 
-## 🏟️ Qué incluye
+## 📋 Qué incluye
 
 | Sección | Contenido |
 | --- | --- |
-| **Intro 3D** | Un futbolista entra al estadio, domina el balón y dispara a la cámara; aparece el nombre. Se entra con cualquier tecla, clic o desplazamiento. |
+| **Intro 3D** | Animación de bienvenida con un personaje 3D y el nombre. Se entra con cualquier tecla, clic o desplazamiento. |
 | **Inicio** | Nombre, cargo (Desarrollador Full Stack), presentación y accesos a proyectos, contacto y CV. |
 | **Sobre mí** | Quién soy, **objetivo profesional**, formación, servicios y hobbies. |
 | **Habilidades** | Tecnologías de frontend, backend, bases de datos y herramientas. |
@@ -27,7 +27,7 @@ Portafolio personal con temática de **fútbol nocturno**: un estadio en 3D que 
 ## 🧰 Stack
 
 - **Next.js 16** (exportación estática) · **React 19** · **TypeScript** · **Tailwind CSS**
-- **React Three Fiber / three.js**: estadio 3D de fondo e intro con personaje animado
+- **React Three Fiber / three.js**: fondo 3D interactivo e intro con personaje animado
 - **Web3Forms**: envío del formulario de contacto sin servidor ni base de datos
 - **GitHub Pages**: publicación del sitio (rama `gh-pages`)
 
@@ -53,6 +53,6 @@ Todo el contenido está en [`constants/index.ts`](constants/index.ts):
 
 ## 🤝 Créditos
 
-- Basado en la plantilla [Space Portfolio](https://github.com/sanidhyy/space-portfolio) de Sanidhya Kumar Verma, bajo licencia [MIT](LICENSE). Rediseñado con temática de fútbol, escenas 3D y contenido propio.
+- Basado en la plantilla [Space Portfolio](https://github.com/sanidhyy/space-portfolio) de Sanidhya Kumar Verma, bajo licencia [MIT](LICENSE). Rediseñado con escenas 3D y contenido propio.
 - Personaje y animaciones de la intro: [Universal Base Characters](https://quaternius.com/packs/universalbasecharacters.html) y [Universal Animation Library](https://quaternius.com/packs/universalanimationlibrary.html) de **Quaternius**, licencia CC0.
 - Los proyectos en equipo muestran el crédito de cada colaborador en su tarjeta.
